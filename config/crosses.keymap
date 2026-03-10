@@ -32,7 +32,7 @@ zip_xy_scaler_fast: zip_xy_scaler_fast {
         input-processors = <&zip_xy_scaler_slow 1 2>; 
     };
 
-    &trackball {
+    &pmw3360 {
         status = "okay";
         
         input-listeners {
