@@ -5,18 +5,19 @@
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 
+&trackball {
+    status = "okay";
+    /* Input-Prozessor zur Skalierung der Geschwindigkeit */
+    input-processors = <&zip_xy_scaler 1 2>; // Verdoppelt die Geschwindigkeit (2/1 Verhältnis)
+};
 
 / {
     chosen { zmk,physical-layout = &gggw_crosses_42_layout; };
 
-	&trackpad_listener {
-	    input-processors = <&zip_xy_scaler 1 3>;
-	
-	    slowMouse {
-	        layers = <3>;
-	        input-processors = <&zip_xy_to_scroll_mapper>;
-	    };
-	};
+	compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <2>;
+        type = "xy";
+    };
 
 	behaviors {
 
@@ -213,7 +214,7 @@
 		
 		enter {
             bindings = <&kp ENTER>;
-            key-positions = <32 33 34>;
+            key-positions = <32 33>;
         };
 
         space {
@@ -293,7 +294,7 @@
 
         questionmark {
             bindings = <&kp LS(MINUS)>;
-            key-positions = <6 18>;
+            key-positions = <8 20>;
         };
 
         sharps {
@@ -388,7 +389,7 @@
             bindings = <
 &kp ESCAPE          &as LS(Q) Q  &as LS(W) W  &as LS(F) F             &as LS(P) P  &as LS(B) B               &as LS(J) J  &as LS(L) L      &as LS(U) U          &as LS(Z) Z      &as LS(SINGLE_QUOTE) SINGLE_QUOTE  &as LS(LEFT_BRACKET) LEFT_BRACKET
 &mt LEFT_ALT LC(Y)  &as LS(A) A  &as LS(R) R  &as LS(S) S             &as LS(T) T  &as LS(G) G               &as LS(M) M  &as LS(N) N      &as LS(E) E          &as LS(I) I      &as LS(O) O                        &as LS(SEMICOLON) SEMICOLON
-&mt LEFT_SHIFT TAB  &as LS(Y) Y  &as LS(X) X  &as LS(C) C             &as LS(D) D  &as LS(V) V               &as LS(K) K  &as LS(H) H      &as LS(COMMA) COMMA  &as LS(DOT) DOT  &as LS(SLASH) SLASH                &mt LSHIFT LS(LG(RIGHT))
+&mt LEFT_SHIFT TAB  &as LS(Y) Y  &as LS(X) X  &as LS(C) C             &as LS(D) D  &as LS(V) V               &as LS(K) K  &as LS(H) H      &as LS(COMMA) COMMA  &as LS(DOT) DOT  &as LS(SLASH) SLASH                &mt LSHIFT ENTER)
                                               &mt LEFT_CONTROL LC(S)  &lt 2 SPACE  &layer_or_Mouse 3 LCLK    &lt 3 ENTER  &lt 2 BACKSPACE  &kp LEFT_WIN
             >;
 
