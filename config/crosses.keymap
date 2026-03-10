@@ -8,6 +8,7 @@
 / {
     chosen { zmk,physical-layout = &gggw_crosses_42_layout; };
 
+/*
 zip_xy_scaler_fast: zip_xy_scaler_fast {
         compatible = "zmk,input-processor-scaler";
         #input-processor-cells = <2>;
@@ -51,7 +52,7 @@ zip_xy_scaler_fast: zip_xy_scaler_fast {
             };
         };
     };
-
+*/
 	behaviors {
 
         hml: homerow_mods_left {
