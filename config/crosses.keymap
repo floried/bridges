@@ -8,20 +8,48 @@
 / {
     chosen { zmk,physical-layout = &gggw_crosses_42_layout; };
 
-	/* Schnelle Maus für den Navigation-Layer */
-    zip_fast_mouse: zip_fast_mouse {
-        compatible = "zmk,input-processor-temp-setting";
-        #input-processor-cells = <0>;
-        input-processors = <&zip_xy_scaler 1 1>; 
-		layers = <0 1 2 4 5>;
+zip_xy_scaler_fast: zip_xy_scaler_fast {
+        compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <2>;
+        type = "xy";
     };
 
-    /* Langsames Scrollen für präzises Lesen */
-    zip_slow_scroll: zip_slow_scroll {
+    zip_xy_scaler_slow: zip_xy_scaler_slow {
+        compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <2>;
+        type = "xy";
+    };
+
+    zip_fast_mode: zip_fast_mode {
         compatible = "zmk,input-processor-temp-setting";
         #input-processor-cells = <0>;
-        input-processors = <&zip_xy_scaler 1 3>; 
-		
+        input-processors = <&zip_xy_scaler_fast 1 1>; 
+    };
+
+    zip_scroll_mode: zip_scroll_mode {
+        compatible = "zmk,input-processor-temp-setting";
+        #input-processor-cells = <0>;
+        input-processors = <&zip_xy_scaler_slow 1 2>; 
+    };
+
+    &trackball {
+        status = "okay";
+        
+        input-listeners {
+            compatible = "zmk,input-listener";
+
+            // Wenn Layer 1 (NAV) aktiv ist -> Schnelle Maus
+            nav_speed {
+                layers = <0 1 2 4 5>;
+                input-processors = <&zip_fast_mode>;
+            };
+
+            // Wenn Layer 2 (SCROLL) aktiv ist -> Langsames Scrollen
+            scroll_config {
+                layers = <3>;
+                input-processors = <&zip_scroll_mode>;
+            };
+        };
     };
 
 	behaviors {
@@ -394,7 +422,7 @@
             bindings = <
 &kp ESCAPE          &as LS(Q) Q  &as LS(W) W  &as LS(F) F             &as LS(P) P  &as LS(B) B               &as LS(J) J  &as LS(L) L      &as LS(U) U          &as LS(Z) Z      &as LS(SINGLE_QUOTE) SINGLE_QUOTE  &as LS(LEFT_BRACKET) LEFT_BRACKET
 &mt LEFT_ALT LC(Y)  &as LS(A) A  &as LS(R) R  &as LS(S) S             &as LS(T) T  &as LS(G) G               &as LS(M) M  &as LS(N) N      &as LS(E) E          &as LS(I) I      &as LS(O) O                        &as LS(SEMICOLON) SEMICOLON
-&mt LEFT_SHIFT TAB  &as LS(Y) Y  &as LS(X) X  &as LS(C) C             &as LS(D) D  &as LS(V) V               &as LS(K) K  &as LS(H) H      &as LS(COMMA) COMMA  &as LS(DOT) DOT  &as LS(SLASH) SLASH                &mt LSHIFT ENTER)
+&mt LEFT_SHIFT TAB  &as LS(Y) Y  &as LS(X) X  &as LS(C) C             &as LS(D) D  &as LS(V) V               &as LS(K) K  &as LS(H) H      &as LS(COMMA) COMMA  &as LS(DOT) DOT  &as LS(SLASH) SLASH                &mt LSHIFT ENTER
                                               &mt LEFT_CONTROL LC(S)  &lt 2 SPACE  &layer_or_Mouse 3 LCLK    &lt 3 ENTER  &lt 2 BACKSPACE  &kp LEFT_WIN
             >;
 
