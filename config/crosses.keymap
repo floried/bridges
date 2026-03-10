@@ -60,7 +60,7 @@
     combos {
         compatible = "zmk,combos";
 
-        To_Base {
+		To_Base {
             bindings = <&to 0>;
             key-positions = <14 15 16>;
         };
@@ -365,6 +365,7 @@
 			wait-ms = <25>;
 			tap-ms = <10>;
 		};
+		
 	};
 
     keymap {
@@ -445,5 +446,7 @@
 			label = "config";
 			
         };
+		
     };
+	
 };
