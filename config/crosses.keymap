@@ -9,24 +9,14 @@
 / {
     chosen { zmk,physical-layout = &gggw_crosses_42_layout; };
 
-    	&mmv {
-    	time-to-max-speed-ms = <500>;
-    	acceleration-exponent = <6>;
+	&trackpad_listener {
+	    input-processors = <&zip_xy_scaler 1 3>;
+	
+	    slowMouse {
+	        layers = <3>;
+	        input-processors = <&zip_xy_to_scroll_mapper>;
+	    };
 	};
-
-	&mmv_input_listener {
-    	set_mouse_fast {
-        	layers = <0 1 2 4 5>;
-        	input-processors = <&zip_xy_scaler 1 1>;
-    	};
-	};
-
-	&mmv_input_listener {
-    	set_mouse_slow {
-        	layers = <3>;
-        	input-processors = <&zip_xy_scaler 1 3>;
-    	};
-	};   
 
 	behaviors {
 
