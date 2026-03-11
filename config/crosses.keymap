@@ -8,52 +8,29 @@
 / {
     chosen { zmk,physical-layout = &gggw_crosses_42_layout; };
 
-    /*
-zip_xy_scaler_fast: zip_xy_scaler_fast {
-        compatible = "zmk,input-processor-scaler";
-        #input-processor-cells = <2>;
-        type = "xy";
+    
+&trackball_central_listener {
+	input-processors = <&zip_ble_report_rate_limit>;
+    scroller: scroller {
+			layers           = <5>;
+			input-processors = <
+			   &zip_xy_scaler 1 15             // Scales the scroll speed
+			   //&zip_xy_to_scroll_mapper        // Converts XY movement to scroll events */
+               &zip_scroll_snap               //  snap to a direction for macos
+			   //&zip_scroll_transform (INPUT_TRANSFORM_Y_INVERT) // Inverts the scroll direction
+							   >;
+		};
+
+    slow_pointer: slow_pointer {
+        layers           = <3>;
+        input-processors = <&zip_xy_scaler 2 8>;
     };
 
-    zip_xy_scaler_slow: zip_xy_scaler_slow {
-        compatible = "zmk,input-processor-scaler";
-        #input-processor-cells = <2>;
-        type = "xy";
+    fast_pointer: fast_pointer {
+        layers           = <0 1 2 4>;
+        input-processors = <&zip_xy_scaler 6 2>;
     };
-
-    zip_fast_mode: zip_fast_mode {
-        compatible = "zmk,input-processor-temp-setting";
-        #input-processor-cells = <0>;
-        input-processors = <&zip_xy_scaler_fast 1 1>; 
-    };
-
-    zip_scroll_mode: zip_scroll_mode {
-        compatible = "zmk,input-processor-temp-setting";
-        #input-processor-cells = <0>;
-        input-processors = <&zip_xy_scaler_slow 1 2>; 
-    };
-
-    &trackball_central_listener {
-        status = "okay";
-        
-        input-listeners {
-            compatible = "zmk,input-listener";
-
-            // Wenn Layer 1 (NAV) aktiv ist -> Schnelle Maus
-            nav_speed {
-                layers = <0 1 2 4 5>;
-                input-processors = <&zip_fast_mode>;
-            };
-
-            // Wenn Layer 2 (SCROLL) aktiv ist -> Langsames Scrollen
-            scroll_config {
-                layers = <3>;
-                input-processors = <&zip_scroll_mode>;
-            };
-        };
-    };
-*/
-
+};
     behaviors {
         hml: homerow_mods_left {
             compatible = "zmk,behavior-hold-tap";
