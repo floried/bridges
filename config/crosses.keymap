@@ -8,8 +8,6 @@
 / {
     chosen { zmk,physical-layout = &gggw_crosses_42_layout; };
 
-&zip_xy_scaler 1 2
-
     /*
 &trackball_central_listener {
 	input-processors = <&zip_ble_report_rate_limit>;
