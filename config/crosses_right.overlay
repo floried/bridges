@@ -1,0 +1,16 @@
+&trackball_peripheral_listener {
+  status = "okay";
+  mouse_mode {
+    layers = <0 1>;  /* list every layer where mouse should work */
+    input-processors = <&zip_ble_report_rate_limit>,
+                        <&zip_xy_scaler 1 3>;
+  };
+  
+  scrolling {
+    layers = <3>;
+    input-processors
+      = <&zip_xy_to_scroll_mapper>
+      , <&zip_scroll_scaler 1 16> //1 4
+      , <&zip_ble_report_rate_limit>;
+  };
+};
