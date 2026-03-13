@@ -8,6 +8,17 @@
 / {
     chosen { zmk,physical-layout = &gggw_crosses_42_layout; };
 
+&trackball_peripheral_listener {
+  status = "okay";
+
+  scrolling {
+    layers = < 2 3 4 5>;
+    input-processors
+      = <&zip_xy_to_scroll_mapper>
+      , <&zip_scroll_scaler 1 20>;  
+  };
+};
+
     /*
 &trackball_central_listener {
 	input-processors = <&zip_ble_report_rate_limit>;
