@@ -35,7 +35,7 @@
    	slow_pointer: slow_pointer{
 	    layers = <3>;
 	    input-processors =
-	        <&zip_scroll_scaler 1 4> //1 4
+	        <&zip_xy_scaler 1 4> //1 4
 		//,	<&zip_xy_to_scroll_mapper>	      
 		//, <&zip_ble_report_rate_limit>
 		;
