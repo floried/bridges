@@ -6,7 +6,7 @@
         , <&zip_scroll_scaler 1 2>
         , <&zip_ble_report_rate_limit>;
 
-
+/*
     slow_scroll: slow_scroll {
         layers = <3>;
         input-processors
@@ -15,4 +15,5 @@
           , <&zip_ble_report_rate_limit>
           , <&zip_scroll_snap>;
     };
+*/
 };
