@@ -31,36 +31,28 @@
 &trackball_central_listener {
 	input-processors = <&zip_ble_report_rate_limit>;
 
-    normal_pointer: normal_pointer {
-		layers           = <0 1 2>;
-		input-processors 
-			=   <&zip_xy_scaler 1 1>             // Scales the scroll speed
-			//,	<&zip_scroll_snap               //  snap to a direction for macos
-			//,	<&zip_scroll_transform (INPUT_TRANSFORM_Y_INVERT)> // Inverts the scroll direction
-			;
-	};
-
-    slow_pointer: slow_pointer {
-        layers           = <3 4>;
-        input-processors 
-			= <&zip_xy_scaler 1 4>
-			, <&zip_scroll_snap> 
-			;
-    };
-
-    sniper_pointer: sniper_pointer {
-        layers           = <5>;
-        input-processors 
-			= <&zip_xy_scaler 1 16>
-			, <&zip_scroll_snap> 
-			;
-    };
-
 	scrolling {
-    layers = <3>;
-    input-processors
-      = <&zip_xy_to_scroll_mapper>
-      , <&zip_scroll_scaler 1 16> //1 4
-      , <&zip_ble_report_rate_limit>;
-  };
+	    layers = <3>;
+	    input-processors
+	      = <&zip_xy_to_scroll_mapper>
+	      , <&zip_scroll_scaler 1 16> //1 4
+	      , <&zip_ble_report_rate_limit>;
+	  };
+
+    scroller: scroller {
+			layers           = <4 5>;
+			input-processors = <
+			   &zip_xy_scaler 1 15             // Scales the scroll speed
+			   //,<&zip_xy_to_scroll_mapper>      // Converts XY movement to scroll events 
+               //,<&zip_scroll_snap>                //  snap to a direction for macos
+			   //,<&zip_scroll_transform (INPUT_TRANSFORM_Y_INVERT)> // Inverts the scroll direction
+			;
+		};
+
+    fast_pointer: fast_pointer {
+        layers           = <0 1 2>;
+        input-processors = <&zip_xy_scaler 1 1>;
+    };
+
+
 };
