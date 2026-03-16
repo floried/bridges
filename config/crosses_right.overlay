@@ -1,25 +1,25 @@
 &trackball_peripheral_listener {
   status = "okay";
   test_scrolling {
-    layers = <1>;  /* list every layer where mouse should work */
+    layers = <0 1 2 4>;  /* list every layer where mouse should work */
     input-processors = <&zip_ble_report_rate_limit>,
-                        <&zip_xy_scaler 4 1>;
+                        <&zip_xy_scaler 1 1>;
   };
 	  
 	norm_scrolling {
-	   layers = <0 2>;
-	   input-processors
-	     = <&zip_ble_report_rate_limit>
-		 , <&zip_xy_to_scroll_mapper>
-	     , <&zip_scroll_scaler 1 4> //1 4
-	     , <&zip_ble_report_rate_limit>;
-	};
-
-	slow_scrolling {
 	   layers = <3>;
 	   input-processors
 	     = <&zip_xy_to_scroll_mapper>
-	     , <&zip_scroll_scaler 1 8> //1 4
+	     , <&zip_scroll_scaler 1 8> 
+	     , <&zip_ble_report_rate_limit>
+		 , <&zip_scroll_snap>
+	};
+
+	slow_scrolling {
+	   layers = <5>;
+	   input-processors
+	     = <&zip_xy_to_scroll_mapper>
+	     , <&zip_scroll_scaler 1 16> 
 	     , <&zip_ble_report_rate_limit>
 		 , <&zip_scroll_snap> 
 		 ;
@@ -31,14 +31,13 @@
 	input-processors = <&zip_ble_report_rate_limit>;
 
     normal_pointer: normal_pointer {
-			layers           = <0 1 2>;
-			input-processors 
-				=   <&zip_xy_scaler 1 1>             // Scales the scroll speed
-				//, <&zip_xy_to_scroll_mapper>      // Converts XY movement to scroll events 
-               	//,	<&zip_scroll_snap               //  snap to a direction for macos
-			   	//,	<&zip_scroll_transform (INPUT_TRANSFORM_Y_INVERT)> // Inverts the scroll direction
-				;
-		};
+		layers           = <0 1 2>;
+		input-processors 
+			=   <&zip_xy_scaler 1 1>             // Scales the scroll speed
+			//,	<&zip_scroll_snap               //  snap to a direction for macos
+			//,	<&zip_scroll_transform (INPUT_TRANSFORM_Y_INVERT)> // Inverts the scroll direction
+			;
+	};
 
     slow_pointer: slow_pointer {
         layers           = <3 4>;
@@ -50,6 +49,9 @@
 
     sniper_pointer: sniper_pointer {
         layers           = <5>;
-        input-processors = <&zip_xy_scaler 1 8>;
+        input-processors 
+			= <&zip_xy_scaler 1 16>
+			, <&zip_scroll_snap> 
+			;
     };
 };
