@@ -1,23 +1,35 @@
 &trackball_peripheral_listener {
   status = "okay";
-  mouse_mode {
-    layers = <0 1>;  /* list every layer where mouse should work */
+  test_scrolling {
+    layers = <1>;  /* list every layer where mouse should work */
     input-processors = <&zip_ble_report_rate_limit>,
-                        <&zip_xy_scaler 1 3>;
+                        <&zip_xy_scaler 4 1>;
   };
-  
-  scrolling {
-    layers = <3>;
-    input-processors
-      = <&zip_xy_to_scroll_mapper>
-      , <&zip_scroll_scaler 1 8> //1 4
-      , <&zip_ble_report_rate_limit>;
-  };
+	  
+	norm_scrolling {
+	   layers = <0 2>;
+	   input-processors
+	     = <&zip_ble_report_rate_limit>
+		 , <&zip_xy_to_scroll_mapper>
+	     , <&zip_scroll_scaler 1 4> //1 4
+	     , <&zip_ble_report_rate_limit>;
+	};
+
+	slow_scrolling {
+	   layers = <3>;
+	   input-processors
+	     = <&zip_xy_to_scroll_mapper>
+	     , <&zip_scroll_scaler 1 8> //1 4
+	     , <&zip_ble_report_rate_limit>
+		 , <&zip_scroll_snap> 
+		 ;
+	};
 }; //end of &trackball_peripheral_listener
 
 
 &trackball_central_listener {
 	input-processors = <&zip_ble_report_rate_limit>;
+
     normal_pointer: normal_pointer {
 			layers           = <0 1 2>;
 			input-processors 
@@ -32,7 +44,7 @@
         layers           = <3 4>;
         input-processors 
 			= <&zip_xy_scaler 1 4>
-			//, <&zip_scroll_snap> 
+			, <&zip_scroll_snap> 
 			;
     };
 
