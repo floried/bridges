@@ -1,7 +1,18 @@
 &trackball_peripheral_split {
     device = <&trackball_peripheral>;
+    layers = <1 2>;
     input-processors
         = <&zip_xy_to_scroll_mapper>
         , <&zip_scroll_scaler 1 4>
         , <&zip_ble_report_rate_limit>;
 };
+
+slow_scroll: slow_scroll {
+    layers = <3>;
+    input-processors
+      = <&zip_xy_to_scroll_mapper>
+      , <&zip_scroll_scaler 1 16> //1 4
+      , <&zip_ble_report_rate_limit>
+      , <&zip_scroll_snap>;
+};
+
