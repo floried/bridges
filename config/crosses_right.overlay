@@ -32,12 +32,7 @@
 &trackball_central_listener {
 	input-processors = <&zip_ble_report_rate_limit>;
 
-    normal_pointer: normal_pointer {
-        layers           = <0 1 2>;
-        input-processors = <&zip_xy_scaler 1 1>;
-    };
-
-	slow_pointer: slow_pointer {
+   	slow_pointer{
 	    layers = <3>;
 	    input-processors =
 	        <&zip_scroll_scaler 1 16> //1 4
@@ -53,5 +48,9 @@
                //,<&zip_scroll_snap>              //  snap to a direction for macos
 			   //,<&zip_scroll_transform (INPUT_TRANSFORM_Y_INVERT)> // Inverts the scroll direction
 				 ;
+		};
+	 normal_pointer: normal_pointer {
+			layers           = <0 1 2>;
+			input-processors = <&zip_xy_scaler 1 1>;
 		};
 };
