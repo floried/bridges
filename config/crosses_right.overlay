@@ -1,10 +1,13 @@
 &trackball_peripheral_listener {
+  input-processors = <&zip_ble_report_rate_limit>;
   status = "okay";
 
   test_scrolling {
     layers = <0 1 2 4>;  /* list every layer where mouse should work */
-    input-processors = <&zip_ble_report_rate_limit>,
-                        <&zip_xy_scaler 1 1>;
+    input-processors = 
+			<&zip_ble_report_rate_limit>
+          , <&zip_xy_scaler 1 1>
+		  ;
   };
 	  
 	norm_scrolling {
@@ -35,7 +38,7 @@
    	slow_pointer: slow_pointer{
 	    layers = <3>;
 	    input-processors =
-	        <&zip_xy_scaler 1 4> //1 4
+	        <&zip_xy_scaler 1 1> //1 4
 		//,	<&zip_xy_to_scroll_mapper>	      
 		//, <&zip_ble_report_rate_limit>
 		;
@@ -52,6 +55,6 @@
 		};
 	 normal_pointer: normal_pointer {
 			layers           = <0 1 2>;
-			input-processors = <&zip_xy_scaler 1 1>;
+			input-processors = <&zip_xy_scaler 1 3>;
 		};
 };
