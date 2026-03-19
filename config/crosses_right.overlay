@@ -54,7 +54,7 @@
 				 ;
 		};
 	normal_pointer: normal_pointer {
-			layers           = <0 1 2>;
+			layers           = <0 1>;
 			input-processors = <&zip_xy_scaler 1 1>;
 		};
 
