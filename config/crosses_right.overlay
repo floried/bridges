@@ -18,7 +18,7 @@
 	  , <&zip_scroll_snap>              //  snap to a direction for macos
 	  ;
   };
-    fast _scroll {
+    fast_scroll {
     layers = <2>;
     input-processors 
       = <&zip_xy_to_scroll_mapper>
