@@ -463,7 +463,7 @@
             bindings = <
 &kp DELETE        &kp NUMBER_1  &kp NUMBER_2           &kp NUMBER_3   &kp NUMBER_4  &kp N5               &kp NUMBER_6   &kp N7        &kp N8        &kp N9        &kp N0             &kp EQUAL
 &mt RA(E) DOLLAR  &kp RA(Q)     &kp LS(RIGHT_BRACKET)  &kp RA(MINUS)  &kp LS(N7)    &kp LS(NUMBER_6)     &kp LS(N0)     &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp RIGHT_BRACKET  &kp GRAVE
-&out OUT_USB      &btsel 0      &btsel 1               &btsel 2       &btsel 3      &kp RA(NON_US_BSLH)  &mt DOT COMMA  &kp N1        &kp N2        &kp N3        &kp SLASH          &kp RA(RIGHT_BRACKET)
+&out OUT_USB      &btsel 0      &btsel 1               &btsel 2       &bt BT_NXT    &kp RA(NON_US_BSLH)  &mt DOT COMMA  &kp N1        &kp N2        &kp N3        &kp SLASH          &kp RA(RIGHT_BRACKET)
                                                        &trans         &trans        &trans               &trans         &kp N0        &trans
             >;
 
