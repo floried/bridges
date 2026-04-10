@@ -6,6 +6,8 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: Good-Great-Grand-Wonderful
       url-base: https://github.com/Good-Great-Grand-Wonderful
+    - name: floried
+      url-base: https://github.com/floried
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -15,5 +17,8 @@ manifest:
       remote: Good-Great-Grand-Wonderful
       revision: zephyr-4.1
       import: config/west.yml
+    - name: zmk-pmw3610-driver
+      remote: floried
+      revision: experimenting-pmw3610-no-zaf
   self:
     path: config
