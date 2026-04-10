@@ -1,7 +1,7 @@
 &trackball_peripheral_listener {
   status = "okay";
-  snap_scrolling {
-    layers = <3>;
+  scrolling {
+    layers = <1>;
     input-processors
       = <&zip_xy_to_scroll_mapper>
       , <&zip_scroll_scaler 1 4>
@@ -9,28 +9,9 @@
 	  , <&zip_scroll_snap>              //  snap to a direction for macos
 	  ;
   };
-    verry_slow_scroll {
-    layers = <5>;
-    input-processors
-      = <&zip_xy_to_scroll_mapper>
-      , <&zip_scroll_scaler 1 12>
-      , <&zip_ble_report_rate_limit>
-	  , <&zip_scroll_snap>              //  snap to a direction for macos
-	  ;
-  };
-    fast_scroll {
-    layers = <2>;
-    input-processors 
-      = <&zip_xy_to_scroll_mapper>
-	  // <&zip_xy_scaler 1 4> 
-      , <&zip_scroll_scaler 4 1>
-      , <&zip_ble_report_rate_limit>
-	  , <&zip_scroll_snap>              //  snap to a direction for macos
-	  ;
-  };
 
-  	normal_scroll {
-    layers = <0 1 4>;  /* list every layer where mouse should work */
+  mouse_mode {
+    layers = <0 2 3 4 5 6>;  /* list every layer where mouse should work */
     input-processors = <&zip_ble_report_rate_limit>;
   };
 };
@@ -51,28 +32,23 @@
     sniper_pointer: sniper_pointer {
 			layers           = <4 5>;
 			input-processors =
-				  <&zip_xy_scaler 1 16>           // Scales the scroll speed
-			   //,<&zip_ble_report_rate_limit>
+				  <&zip_xy_scaler 1 15>           // Scales the scroll speed
 			   //,<&zip_xy_to_scroll_mapper>      // Converts XY movement to scroll events 
-               //,<&zip_scroll_snap>              // snap to a direction for macos
+               //,<&zip_scroll_snap>              //  snap to a direction for macos
 			   //,<&zip_scroll_transform (INPUT_TRANSFORM_Y_INVERT)> // Inverts the scroll direction
 				 ;
 		};
 	normal_pointer: normal_pointer {
 			layers           = <0 1>;
-			input-processors = 
-			  <&zip_xy_scaler 1 1>
-			//<&zip_ble_report_rate_limit>
-			;
+			input-processors = <&zip_xy_scaler 1 1>;
 		};
 
 	scroller_r: scroller_r {
 		layers           = <2>;
 		input-processors 
 			= <&zip_xy_scaler 1 4>
-			//, <&zip_ble_report_rate_limit>
-			//, <&zip_xy_to_scroll_mapper>      // Converts XY movement to scroll events 
-            //, <&zip_scroll_snap>              //  snap to a direction for macos
+			, <&zip_xy_to_scroll_mapper>      // Converts XY movement to scroll events 
+            , <&zip_scroll_snap>              //  snap to a direction for macos
 			;
 	};
 };
